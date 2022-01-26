@@ -3,20 +3,33 @@
 let selections = ["Rock", "Paper", "Scissors"];
 
 function computerPlay() {
-  let computerSelection = Math.floor(Math.random() * selections.length);
-
-  if (computerSelection === 0) {
-    console.log(selections[0]);
-  } else if (computerSelection === 1) {
-    console.log(selections[1]);
-  } else {
-    console.log(selections[2]);
+  let randomSelection = Math.floor(Math.random() * selections.length);
+  if (randomSelection == 0) {
+    randomSelection = selections[0];
+  } else if (randomSelection == 1) {
+    randomSelection = selections[1];
+  } else if (randomSelection == 2) {
+    randomSelection = selections[2];
   }
+  return randomSelection;
 }
 
 const computerSelection = computerPlay();
-const playerSelection = prompt("Select rock, paper or scissors: ");
+console.log(computerSelection);
 
-let regExp = /^rock$||^paper$||^scissors$/gi;
+let initialSelection = prompt("Select rock, paper or scissors: ");
+initialSelection = initialSelection.toLowerCase();
+let playerSelection;
 
-function playRound(computerSelection, playerSelection) {}
+if (initialSelection == "rock") {
+  playerSelection = selections[0];
+  console.log("You chose rock. Good luck.");
+} else if (initialSelection == "paper") {
+  playerSelection = selections[1];
+  console.log("You chose paper. Good luck.");
+} else if (initialSelection == "scissors") {
+  playerSelection = selections[2];
+  console.log("You chose scissors. Good luck.");
+} else {
+  console.log("Please submit valid input. Refresh and try again.");
+}
