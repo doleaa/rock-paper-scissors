@@ -1,7 +1,7 @@
-// A function that enables the PC to make a random choice from the selections array and then print the result.
-
+// An array for the game choices.
 let selections = ["Rock", "Paper", "Scissors"];
 
+// A function that enables the PC to make a random choice from the selections array.
 function computerPlay() {
   let randomSelection = Math.floor(Math.random() * selections.length);
   if (randomSelection == 0) {
@@ -14,13 +14,17 @@ function computerPlay() {
   return randomSelection;
 }
 
+// Assigning the function output to this variable.
 const computerSelection = computerPlay();
 console.log(computerSelection);
 
+// Prompting the user for an input and converting it to lowercase.
 let initialSelection = prompt("Select rock, paper or scissors: ");
 initialSelection = initialSelection.toLowerCase();
+
 let playerSelection;
 
+// Conditional statement that turns user input into a value from selection array.
 if (initialSelection == "rock") {
   playerSelection = selections[0];
   console.log("You chose rock. Good luck.");
