@@ -7,6 +7,60 @@ let computerPoints = 0;
 let playerPoints = 0;
 let generalScore;
 
+function computerWins(computerSelectionInLowerCase, playerSelectionInLowerCase) {
+  //TODO: discuss '==' vs '==='
+  if (computerSelectionInLowerCase === playerSelectionInLowerCase) {
+    return false;
+  } else if (computerSelectionInLowerCase === "rock") {
+    if (playerSelectionInLowerCase === "paper") {
+      return false;
+    }
+  } else if (computerSelectionInLowerCase === "paper") {
+    if (playerSelectionInLowerCase === "scissors") {
+      return false;
+    }
+  } else {
+    if (playerSelectionInLowerCase === "rock") {
+      return false;
+    }
+  }
+
+  return true;
+}
+function playerWins(computerSelectionInLowerCase, playerSelectionInLowerCase) {
+  if (playerSelectionInLowerCase === computerSelectionInLowerCase) {
+    return false;
+  } else if (playerSelectionInLowerCase === "rock") {
+    if (computerSelectionInLowerCase === "paper") {
+      return false;
+    }
+  } else if (playerSelectionInLowerCase === "paper") {
+    if (computerSelectionInLowerCase === "scissors") {
+      return false;
+    }
+  } else {
+    if (playerSelectionInLowerCase === "rock") {
+      return false;
+    }
+  }
+
+  return true;
+}
+function itIsADraw(computerSelectionInLowerCase, playerSelectionInLowerCase) {
+  if (computerSelectionInLowerCase !== playerSelectionInLowerCase) {
+    return false;
+  }
+
+  return true;
+}
+
+function generateComputerSelection() {
+  //TODO: discuss about 'let' & 'const'
+  const randomNumber = Math.floor(Math.random() * selections.length);
+
+  return selections[randomNumber];
+}
+
 function playRound(computerSelection, playerSelection) {
   function computerPlay() {
     let randomSelection = Math.floor(Math.random() * selections.length);
