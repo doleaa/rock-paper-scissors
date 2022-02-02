@@ -1,57 +1,51 @@
 console.log("Welome to Rock, Paper, Scissors. Best out of 5 wins. Good luck!");
 
 let selections = ["Rock", "Paper", "Scissors"];
-let computerSelection;
-let playerSelection;
 let computerPoints = 0;
 let playerPoints = 0;
-let generalScore;
 
-function computerWins(computerSelectionInLowerCase, playerSelectionInLowerCase) {
+function computerWins(givenComputerSelection, givenPlayerSelection) {
   //TODO: discuss '==' vs '==='
-  if (computerSelectionInLowerCase === playerSelectionInLowerCase) {
+  if (givenComputerSelection === givenPlayerSelection) {
     return false;
-  } else if (computerSelectionInLowerCase === "rock") {
-    if (playerSelectionInLowerCase === "paper") {
+  } else if (givenComputerSelection === "rock") {
+    if (givenPlayerSelection === "paper") {
       return false;
     }
-  } else if (computerSelectionInLowerCase === "paper") {
-    if (playerSelectionInLowerCase === "scissors") {
+  } else if (givenComputerSelection === "paper") {
+    if (givenPlayerSelection === "scissors") {
       return false;
     }
   } else {
-    if (playerSelectionInLowerCase === "rock") {
+    if (givenPlayerSelection === "rock") {
       return false;
     }
   }
 
   return true;
 }
-function playerWins(computerSelectionInLowerCase, playerSelectionInLowerCase) {
-  if (playerSelectionInLowerCase === computerSelectionInLowerCase) {
+function itIsADraw(givenComputerSelection, givenPlayerSelection) {
+  if (givenComputerSelection !== givenPlayerSelection) {
     return false;
-  } else if (playerSelectionInLowerCase === "rock") {
-    if (computerSelectionInLowerCase === "paper") {
-      return false;
-    }
-  } else if (playerSelectionInLowerCase === "paper") {
-    if (computerSelectionInLowerCase === "scissors") {
-      return false;
-    }
-  } else {
-    if (playerSelectionInLowerCase === "rock") {
-      return false;
-    }
   }
 
   return true;
 }
-function itIsADraw(computerSelectionInLowerCase, playerSelectionInLowerCase) {
-  if (computerSelectionInLowerCase !== playerSelectionInLowerCase) {
-    return false;
+function parseUserSelection(givenUserPopupSelection) {
+  if (givenUserPopupSelection == "rock") {
+    console.log(`You chose ${givenUserPopupSelection.toLowerCase()}.`);
+    return selections[0];
+  } else if (givenUserPopupSelection == "paper") {
+    console.log(`You chose ${givenUserPopupSelection.toLowerCase()}.`);
+    return selections[1];
+  } else if (givenUserPopupSelection == "scissors") {
+    console.log(`You chose ${givenUserPopupSelection.toLowerCase()}.`);
+    return selections[2];
+  } else {
+    console.log("You can only choose rock, paper or scissors. Refresh and try again.");
   }
 
-  return true;
+  return undefined;
 }
 
 function generateComputerSelection() {
@@ -61,70 +55,36 @@ function generateComputerSelection() {
   return selections[randomNumber];
 }
 
-function playRound(computerSelection, playerSelection) {
-  function computerPlay() {
-    let randomSelection = Math.floor(Math.random() * selections.length);
-    if (randomSelection == 0) {
-      randomSelection = selections[0];
-    } else if (randomSelection == 1) {
-      randomSelection = selections[1];
-    } else if (randomSelection == 2) {
-      randomSelection = selections[2];
-    }
-    return randomSelection;
-  }
+function playRound() {
+  let computerSelection;
+  let playerSelection;
 
-  computerSelection = computerPlay();
+  computerSelection = generateComputerSelection();
 
-  let initialSelection = prompt("Select rock, paper or scissors: ");
-  initialSelection = initialSelection.toLowerCase();
+  let popupReference = prompt("Select rock, paper or scissors: ");
+  let userPopupSelection = popupReference.toLowerCase();
 
-  if (initialSelection == "rock") {
-    playerSelection = selections[0];
-    console.log(`You chose ${playerSelection.toLowerCase()}.`);
-  } else if (initialSelection == "paper") {
-    playerSelection = selections[1];
-    console.log(`You chose ${playerSelection.toLowerCase()}.`);
-  } else if (initialSelection == "scissors") {
-    playerSelection = selections[2];
-    console.log(`You chose ${playerSelection.toLowerCase()}.`);
+  playerSelection = parseUserSelection(userPopupSelection);
+
+
+  if (itIsADraw(computerSelection, playerSelection)) {
+    console.log(`Computer chose ${playerSelection.toLowerCase()} too. Phew! This round is a draw.`);
+    ++computerPoints;
+    ++playerPoints;
+  } else if (computerWins(computerSelection, playerSelection)) {
+    console.log(`Computer chose ${computerSelection.toLowerCase()} and won this round. Nice try though.`);
+    ++computerPoints;
   } else {
-    console.log(
-      "You can only choose rock, paper or scissors. Refresh and try again."
-    );
+    console.log(`Computer chose ${computerSelection.toLowerCase()}. You win this round.`);
+    ++playerPoints;
   }
 
-  if (computerSelection === playerSelection) {
-    console.log(
-      `Computer chose ${playerSelection.toLowerCase()} too. Phew! This round is a draw.`
-    );
-    computerPoints = ++computerPoints;
-    playerPoints = ++playerPoints;
-  } else if (
-    (computerSelection === selections[0] &&
-      playerSelection === selections[1]) ||
-    (computerSelection === selections[1] &&
-      playerSelection === selections[2]) ||
-    (computerSelection === selections[2] && playerSelection === selections[0])
-  ) {
-    console.log(
-      `Computer chose ${computerSelection.toLowerCase()}. You win this round.`
-    );
-    playerPoints = ++playerPoints;
-  } else {
-    console.log(
-      `Computer chose ${computerSelection.toLowerCase()} and won this round. Nice try though.`
-    );
-    computerPoints = ++computerPoints;
-  }
-  generalScore =
-    "Score: Computer " + computerPoints + " - " + playerPoints + " Player";
-  console.log(generalScore);
+  console.log(`Score: Computer ${computerPoints} - ${playerPoints} Player`);
 }
 
 function game() {
   for (let i = 0; i < 5; i++) {
-    playRound(computerSelection, playerSelection);
+    playRound();
   }
   if (computerPoints > playerPoints) {
     console.log(`Game over. You lost, sorry! Refresh to play again.`);
