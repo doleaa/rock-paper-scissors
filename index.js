@@ -70,8 +70,8 @@ function playRound() {
     console.log(
       `Computer chose ${playerSelection.toLowerCase()} too. Phew! This round is a draw.`
     );
-    ++computerPoints;
-    ++playerPoints;
+    // ++computerPoints;
+    // ++playerPoints;
   } else if (computerWins(computerSelection, playerSelection)) {
     console.log(
       `Computer chose ${computerSelection.toLowerCase()} and won this round. Nice try though.`
@@ -89,6 +89,7 @@ function playRound() {
 
 function game() {
   for (let i = 0; i < 5; i++) {
+    alert(`Round ${i + 1} out of 5.`);
     playRound();
   }
   if (computerPoints > playerPoints) {
