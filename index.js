@@ -15,7 +15,7 @@ function computerWins(givenComputerSelection, givenPlayerSelection) {
     if (givenPlayerSelection === "scissors") {
       return false;
     }
-  } else if (givenComputerSelection === "scissors") {
+  } else {
     if (givenPlayerSelection === "rock") {
       return false;
     }
@@ -91,6 +91,12 @@ function game() {
   for (let i = 0; i < 5; i++) {
     alert(`Round ${i + 1} out of 5.`);
     playRound();
+    if (
+      (computerPoints === 3 && playerPoints === 0) ||
+      (computerPoints === 0 && playerPoints === 3)
+    ) {
+      break;
+    }
   }
   if (computerPoints > playerPoints) {
     console.log(`Game over. You lost, sorry! Refresh to play again.`);
