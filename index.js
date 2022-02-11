@@ -7,16 +7,16 @@ let playerPoints = 0;
 function computerWins(givenComputerSelection, givenPlayerSelection) {
   if (givenComputerSelection === givenPlayerSelection) {
     return false;
-  } else if (givenComputerSelection === "rock") {
-    if (givenPlayerSelection === "paper") {
+  } else if (givenComputerSelection === "Rock") {
+    if (givenPlayerSelection === "Paper") {
       return false;
     }
-  } else if (givenComputerSelection === "paper") {
-    if (givenPlayerSelection === "scissors") {
+  } else if (givenComputerSelection === "Paper") {
+    if (givenPlayerSelection === "Scissors") {
       return false;
     }
   } else {
-    if (givenPlayerSelection === "rock") {
+    if (givenPlayerSelection === "Rock") {
       return false;
     }
   }
@@ -24,30 +24,28 @@ function computerWins(givenComputerSelection, givenPlayerSelection) {
 }
 
 function itIsADraw(givenComputerSelection, givenPlayerSelection) {
-  if (givenComputerSelection !== givenPlayerSelection) {
-    return false;
-  }
-
-  return true;
+  return (givenComputerSelection === givenPlayerSelection);
 }
 
-function parseUserSelection(givenUserPopupSelection) {
-  if (givenUserPopupSelection == "rock") {
-    alert(`You chose ${givenUserPopupSelection.toLowerCase()}.`);
-    return selections[0];
-  } else if (givenUserPopupSelection == "paper") {
-    alert(`You chose ${givenUserPopupSelection.toLowerCase()}.`);
-    return selections[1];
-  } else if (givenUserPopupSelection == "scissors") {
-    alert(`You chose ${givenUserPopupSelection.toLowerCase()}.`);
-    return selections[2];
+function parseUserSelection(givenUserPopupSelectionInLowerCase) {
+  let selectedValue;
+
+  if (givenUserPopupSelectionInLowerCase === "rock") {
+    selectedValue = selections[0];
+  } else if (givenUserPopupSelectionInLowerCase === "paper") {
+    selectedValue = selections[1];
+  } else if (givenUserPopupSelectionInLowerCase === "scissors") {
+    selectedValue = selections[2];
   } else {
     alert(
-      "You can only choose rock, paper or scissors. Refresh and try again."
+      "You can only choose Rock, Paper or Scissors. Refresh and try again."
     );
+
+    return undefined;
   }
 
-  return undefined;
+  alert(`You chose ${selectedValue}.`);
+  return selectedValue;
 }
 
 function generateComputerSelection() {
@@ -61,10 +59,10 @@ function playRound() {
 
   computerSelection = generateComputerSelection();
 
-  let popupReference = prompt("Select rock, paper or scissors: ");
-  let userPopupSelection = popupReference.toLowerCase();
+  let popupReference = prompt("Select Rock, Paper or Scissors: ");
+  let userPopupSelectionInLowerCase = popupReference.toLowerCase();
 
-  playerSelection = parseUserSelection(userPopupSelection);
+  playerSelection = parseUserSelection(userPopupSelectionInLowerCase);
 
   if (itIsADraw(computerSelection, playerSelection)) {
     alert(
