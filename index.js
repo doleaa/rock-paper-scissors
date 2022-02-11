@@ -65,20 +65,12 @@ function playRound() {
   playerSelection = parseUserSelection(userPopupSelectionInLowerCase);
 
   if (itIsADraw(computerSelection, playerSelection)) {
-    alert(
-      `Computer chose ${playerSelection.toLowerCase()} too. Phew! This round is a draw.`
-    );
-    // ++computerPoints;
-    // ++playerPoints;
+    alert(`Computer chose ${playerSelection.toLowerCase()} too. Phew! This round is a draw.`);
   } else if (computerWins(computerSelection, playerSelection)) {
-    alert(
-      `Computer chose ${computerSelection.toLowerCase()} and won this round. Nice try though.`
-    );
+    alert(`Computer chose ${computerSelection.toLowerCase()} and won this round. Nice try though.`);
     ++computerPoints;
   } else {
-    alert(
-      `Computer chose ${computerSelection.toLowerCase()}. You win this round.`
-    );
+    alert(`Computer chose ${computerSelection.toLowerCase()}. You win this round.`);
     ++playerPoints;
   }
 
